@@ -74,11 +74,14 @@ try
     % Define variables for frame timing
     frameCounter = 0;
 
+    changeFrame = 300; % 10 seconds at 60 Hz refresh rate
+
     % Run in this duration
     deadline = GetSecs + maxduration;
 
     % Initiate an index that gets updated at every movie loop
     indexflip = 1;
+    currentRect = 1; % Current rectangle to highlight
 
     % Tell computer OS to prioritize this task (to increase time precision)
     Priority(1);
@@ -125,11 +128,21 @@ try
             DrawFormattedText(win, text, 'center', 'center', [0 0 0], [], [], [], [], [], rects(i, :));
         end
 
+        % Highlight the current rectangle with red border
+        Screen('FrameRect', win, [255, 0, 0], rects(currentRect, :), 5);
+
         % Flip frame
         Screen('Flip', win);
 
         % Update number of flips occurring
         indexflip = indexflip + 1;
+        
+         % Increment frame counter and check if it's time to change the highlighted rectangle
+        frameCounter = frameCounter + 1;
+        if frameCounter >= changeFrame
+            frameCounter = 0; % Reset counter
+            currentRect = mod(currentRect, 4) + 1; % Move to next rectangle, wrap around after the 4th
+        end
 
         % Reset index at the end of freq matrix
         if indexflip > lcmFreq
