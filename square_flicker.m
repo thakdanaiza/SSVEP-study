@@ -10,7 +10,7 @@ info = lsl_streaminfo(lib, 'MyMarkerStream', 'Markers', 1, 0, 'cf_string', 'even
 outlet = lsl_outlet(info);
 
 % Define desired frequencies for each box (Hz)
-desiredFreqs = [10, 20, 30, 120]; % Example frequencies in Hz
+desiredFreqs = [6.6, 7.5, 8.57, 10]; % Example frequencies in Hz
 
 % Generate frequency patterns based on desired frequencies
 % Assuming a common refresh rate of 60 Hz for simplicity
