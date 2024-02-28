@@ -115,7 +115,7 @@ try
         end
 
         if cue_ind <= 1
-            marker = ['cue_' num2str(currentRect)];
+            marker = ['cue_' num2str(cue_sequence(cue_count))];
             outlet.push_sample({marker});
             disp('marker sent')
             cue_ind = 2;
